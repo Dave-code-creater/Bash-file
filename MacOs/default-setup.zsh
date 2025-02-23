@@ -1,6 +1,14 @@
 #!/bin/zsh
 
 echo "This is the automate script for setting up a new Mac machine for development."
+echo "Here is the list of tools that will be installed:"
+echo "1. Brew"
+echo "2. Git"
+echo "3. Python"
+echo "4. Visual Studio Code"
+echo "5. Docker"
+echo "6. Slack"
+echo "7. Zoom"
 echo "Are you agree to start"
 read -p "Enter y to continue or n to exit: " response
 if ([ $response = "y" ] || [ $response = "Y" ]); then
