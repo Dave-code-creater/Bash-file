@@ -1,37 +1,54 @@
 #!/bin/bash
 
-# Install VSC
-sudo dnf install code -y
+echo "This script will install the following packages:"
+echo "1. Visual Studio Code"
+echo "2. GCC"
+echo "3. Python3"
+echo "4. Docker"
+echo "5. Git"
+echo "6. SSH"
+echo "7. Aliases"
+echo "Do you want to continue? (y/n)"
+read -r response
 
-# Install GCC
-sudo dnf install gcc -y
+if [[ "$response" == "y" || "$response" == "yes" ]]
+then    
+    # Install VSC
+    sudo dnf install code -y
 
-# Install python
-sudo dnf install python3 -y
+    # Install GCC
+    sudo dnf install gcc -y
 
-# Install Docker
-sudo dnf -y install dnf-plugins-core
-sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo systemctl enable --now docker
+    # Install python
+    sudo dnf install python3 -y
 
-# Install git
-sudo dnf install git -y
+    # Install Docker
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
 
-# Install SSH
-sudo dnf install openssh-server -y
-sudo systemctl enable --now sshd
+    sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo systemctl enable --now docker
 
-# Install Wget
-sudo dnf install wget -y
+    # Install git
+    sudo dnf install git -y
 
-# Set up allias
-echo 'alias ll="ls -alt"' >> ~/.bashrc
-echo 'alias pd="pwd"' >> ~/.bashrc
-echo 'alias la="ls -a"' >> ~/.bashrc
-echo 'alias ..="cd .."' >> ~/.bashrc
-echo 'alias ..2="cd ../.."' >> ~/.bashrc
+    # Install SSH
+    sudo dnf install openssh-server -y
+    sudo systemctl enable --now sshd
 
-# Reload .bashrc to apply aliases immediately
-source ~/.bashrc
+    # Install Wget
+    sudo dnf install wget -y
 
+    # Set up allias
+    echo 'alias ll="ls -alt"' >> ~/.bashrc
+    echo 'alias pd="pwd"' >> ~/.bashrc
+    echo 'alias la="ls -a"' >> ~/.bashrc
+    echo 'alias ..="cd .."' >> ~/.bashrc
+    echo 'alias ..2="cd ../.."' >> ~/.bashrc
+
+    # Reload .bashrc to apply aliases immediately
+    source ~/.bashrc
+
+else 
+    echo "Installation aborted!";
+fi

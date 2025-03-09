@@ -1,10 +1,39 @@
 #!/bin/bash
 
-# Install NPM, Nodejs
-sudo dnf install npm -y
-sudo dnf install nodejs -y
+echo "This script will install the following packages:"
+echo "1. Visual Studio Code"
+echo "2. nodejs"
+echo "3. npm"
+echo "4. Docker"
+echo "5. Git"
+echo "Do you want to continue? (y/n)"
+read -r response
 
-# Install chrome
-cd ~/Downloads
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-sudo dnf install  ./google-chrome-stable_current_x86_64.rpm -y
+if [[ "$response" == "y" || "$response" == "yes" ]]
+then
+    # Install NPM, Nodejs
+    sudo dnf install npm -y
+    sudo dnf install nodejs -y
+
+    # Install chrome
+    cd ~/Downloads
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    sudo dnf install  ./google-chrome-stable_current_x86_64.rpm -y
+
+    # Install Docker
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+    sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo systemctl enable --now docker
+
+    # Install git
+    sudo dnf install git -y
+
+    # Install VSC
+    sudo dnf install code -y
+
+    echo "Done!";
+else
+    echo "Installation aborted!";
+fi
